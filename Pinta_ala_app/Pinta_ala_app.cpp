@@ -1,7 +1,17 @@
-// Pinta_ala_app.cpp : Defines the entry point for the console application.
-//
+#include <stdio.h>
+#include <tchar.h>
+#include <string>
+#include <iostream>
+#include <stdlib.h>
+#include <Windows.h>
+#include <sstream>
+#include "../DLLMath/MathDLL.h"
+#include <time.h>
 
-#include "stdafx.h"
+using namespace std;
+using namespace MyMath;
+
+#define LANG FI
 
 #if LANG == FI
 	#include "Lang_fi.h"
