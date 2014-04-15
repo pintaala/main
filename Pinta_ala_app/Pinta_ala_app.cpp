@@ -66,11 +66,11 @@ void callRegistryKey() {
 	HKEY hKey;
 	LPCWSTR sKey = L"SOFTWARE\\Pinta_Ala";
 	
-	long error = RegOpenKeyEx(HKEY_CURRENT_USER,sKey,0,KEY_ALL_ACCESS, &hKey );
+	long error = RegOpenKeyExW(HKEY_CURRENT_USER,sKey,0,KEY_ALL_ACCESS, &hKey );
 
 	// if registry key is not found, we create it
 	if(error = ERROR_FILE_NOT_FOUND) {
-		RegCreateKeyEx(HKEY_CURRENT_USER,sKey,0,NULL,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,NULL,&hKey,NULL);
+		RegCreateKeyExW(HKEY_CURRENT_USER,sKey,0,NULL,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,NULL,&hKey,NULL);
 	}
 
 	DWORD lpcbData;
@@ -84,12 +84,12 @@ void callRegistryKey() {
 	DWORD bufSize = sizeof(date);
 
 
-	if( RegQueryValueEx(hKey,L"stringValue",0,&type,(LPBYTE)val,&lpcbData) == ERROR_SUCCESS) { // handle error 
+	if( RegQueryValueExW(hKey,L"stringValue",0,&type,(LPBYTE)val,&lpcbData) == ERROR_SUCCESS) { // handle error 
 		
 		cout << endl << lastOpen << val << endl << endl;
 	}
 
-	RegSetValueEx(hKey,L"stringValue",0,REG_SZ,(PBYTE)&date,bufSize); 
+	RegSetValueExW(hKey,L"stringValue",0,REG_SZ,(PBYTE)&date,bufSize); 
 
 	RegCloseKey(hKey);
 }
