@@ -4,3 +4,4 @@ string resultText  = " area is ";
 string circle = "Circle";
 string triangle = "Triangle";
 string quadrangle = "Quadrangle";
+string warningText = "Error";

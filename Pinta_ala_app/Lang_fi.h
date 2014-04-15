@@ -4,3 +4,4 @@ string resultText  = " pinta-ala on ";
 string circle = "Ympyran";
 string triangle = "Kolmion";
 string quadrangle = "Nelikulmion";
+string warningText = "Error";

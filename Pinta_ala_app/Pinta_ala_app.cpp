@@ -20,12 +20,12 @@ using namespace MyMath;
 #endif
 
 void callRegistryKey();
-void helppari();
+double CheckDigit (int param_count, char* height, char* width, string shape);
 
 int main(int argc, char *argv[])
 {	
 	if ( argc < 2 || argc > 5 ) {
-		helppari();
+		cout << helpText;
 		return 0;
 	}
 
@@ -34,37 +34,21 @@ int main(int argc, char *argv[])
 	string shape;
 
 	char* shape_a = argv[1];
-	string radius_s = ""; 
-	string sideA_s = "";
-	string sideB_s = "";
-
-	double radius = 0;
-	double sideA = 0;
-	double sideB = 0;
 	double result = 0;
 
 	switch ( shape_a[1] ) {
 	case 'c':
 		shape = circle;
-		radius_s = argv[2];
-		radius = atof(radius_s.c_str());
-		result = Math::circle(radius);
+		argv[3] = "0";
+		result = CheckDigit(argc, argv[2],argv[3],shape);
 		break;
 	case 't':
 		shape = triangle;
-		sideA_s = argv[2];
-		sideB_s = argv[3];
-		sideA = atof(sideA_s.c_str());
-		sideB = atof(sideB_s.c_str());
-		result = Math::triangle(sideA,sideB);
+		result = CheckDigit(argc, argv[2],argv[3],shape);
 		break;
 	case 'q':
 		shape = quadrangle;
-		sideA_s = argv[2];
-		sideB_s = argv[3];
-		sideA = atof(sideA_s.c_str());
-		sideB = atof(sideB_s.c_str());
-		result = Math::quadrangle(sideA,sideB);
+		result = CheckDigit(argc, argv[2],argv[3],shape);
 		break;
 	default:
 		break;
@@ -75,13 +59,18 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-
+/**  
+* This function opens the registry key and reads and writes the last time the software were opened
+*/
 void callRegistryKey() {
 	HKEY hKey;
-	long error = RegOpenKeyExW(HKEY_CURRENT_USER,L"SOFTWARE\\Pinta_Ala",0,KEY_ALL_ACCESS, &hKey );
+	LPCWSTR sKey = L"SOFTWARE\\Pinta_Ala";
+	
+	long error = RegOpenKeyEx(HKEY_CURRENT_USER,sKey,0,KEY_ALL_ACCESS, &hKey );
 
+	// if registry key is not found, we create it
 	if(error = ERROR_FILE_NOT_FOUND) {
-		RegCreateKeyExW(HKEY_CURRENT_USER,L"SOFTWARE\\Pinta_Ala",0,NULL,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,NULL,&hKey,NULL);
+		RegCreateKeyEx(HKEY_CURRENT_USER,sKey,0,NULL,REG_OPTION_NON_VOLATILE,KEY_ALL_ACCESS,NULL,&hKey,NULL);
 	}
 
 	DWORD lpcbData;
@@ -95,18 +84,64 @@ void callRegistryKey() {
 	DWORD bufSize = sizeof(date);
 
 
-	if( RegQueryValueExW(hKey,L"stringValue",0,&type,(LPBYTE)val,&lpcbData) == ERROR_SUCCESS) { // handle error 
+	if( RegQueryValueEx(hKey,L"stringValue",0,&type,(LPBYTE)val,&lpcbData) == ERROR_SUCCESS) { // handle error 
 		
 		cout << endl << lastOpen << val << endl << endl;
 	}
 
-	RegSetValueExW(hKey,L"stringValue",0,REG_SZ,(PBYTE)&date,bufSize); 
+	RegSetValueEx(hKey,L"stringValue",0,REG_SZ,(PBYTE)&date,bufSize); 
 
 	RegCloseKey(hKey);
 }
 
-void helppari() {
-	cout << helpText;
-}
+/**  
+* This function calculates the area of the shape큦
+* @param paramCount parameters amount
+* @param height shape큦 height
+* @param width shape큦 width
+* @param shape which kind of shape it is
+* @return result the shape큦 calculated area
+*/
+double CheckDigit (int paramCount, char* height, char* width, string shape) {
+	double sideA = 0;
+	double sideB = 0;
+	double result = 0;
 
-//void Triangle
+	string sideA_s = "";
+	string sideB_s = "";
+
+	sideA_s = height;
+	sideB_s = width;
+
+	for(int i = 0; i < sideA_s.length(); i++) {
+		if( !isdigit( sideA_s.at(i) ) ) {
+			cout << warningText << endl;
+			return 1;
+		}
+	}
+	if(paramCount == 4) {
+		for(int i = 0; i < sideB_s.length(); i++) {
+			if( !isdigit( sideB_s.at(i) ) ) {
+				cout << warningText << endl;
+				return 1;
+			}
+		}
+	
+		sideA = atof(sideA_s.c_str());
+		sideB = atof(sideB_s.c_str());
+
+		if(shape == "Triangle" || shape == "Kolmion" ) {
+			result = Math::triangle(sideA,sideB);
+		}
+		else {
+			result = Math::quadrangle(sideA,sideB);
+		}
+	}
+
+	else if(paramCount == 3){
+		sideA = atof(sideA_s.c_str());
+		result = Math::circle(sideA);
+	}
+	
+	return result;
+}
