@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pinta_ala_app", "Pinta_ala_app\Pinta_ala_app.vcxproj", "{E03E6B55-6A9D-4669-BED2-0039D51F0D24}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DLLMath", "DLLMath\DLLMath.vcxproj", "{5449C2C7-30E0-4F43-B5C6-A6AC583F496B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E03E6B55-6A9D-4669-BED2-0039D51F0D24}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E03E6B55-6A9D-4669-BED2-0039D51F0D24}.Debug|Win32.Build.0 = Debug|Win32
+		{E03E6B55-6A9D-4669-BED2-0039D51F0D24}.Release|Win32.ActiveCfg = Release|Win32
+		{E03E6B55-6A9D-4669-BED2-0039D51F0D24}.Release|Win32.Build.0 = Release|Win32
+		{5449C2C7-30E0-4F43-B5C6-A6AC583F496B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5449C2C7-30E0-4F43-B5C6-A6AC583F496B}.Debug|Win32.Build.0 = Debug|Win32
+		{5449C2C7-30E0-4F43-B5C6-A6AC583F496B}.Release|Win32.ActiveCfg = Release|Win32
+		{5449C2C7-30E0-4F43-B5C6-A6AC583F496B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
