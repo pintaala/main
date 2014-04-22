@@ -9,7 +9,6 @@
 #include <time.h>
 
 using namespace std;
-using namespace MyMath;
 
 #define LANG FI
 

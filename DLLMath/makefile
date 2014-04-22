@@ -2,13 +2,10 @@ SOURCES=MathDLL.cpp
 OBJECTS=$(SOURCES:.cpp=.obj)
 LIBS=$(SOURCES:.cpp=.lib)
 EXPS=$(SOURCES:.cpp=.exp)
-EXECUTABLE=MathDLL.exe
+EXECUTABLE=MathDLL.dll
 	
-$(EXECUTABLE): $(OBJECTS) 
-				link /DLL /out:$(EXECUTABLE) $(OBJECTS)
-
-MathDLL.obj: MathDLL.cpp MathDLL.h
-				cl /c /EHsc MathDLL.cpp
+$(EXECUTABLE): MathDLL.cpp MathDLL.h
+	cl /LD $(SOURCES) /link /DLL /out:$(EXECUTABLE)
 	
 clean:
 	del $(OBJECTS) $(EXECUTABLE) $(LIBS) $(EXPS)

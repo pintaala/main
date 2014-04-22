@@ -3,10 +3,10 @@ OBJECTS=$(SOURCES:.cpp=.obj)
 EXECUTABLE=calc.exe
 
 $(EXECUTABLE): $(OBJECTS)
-				link /out:$(EXECUTABLE) $(OBJECTS)
+	link /out:$(EXECUTABLE) $(OBJECTS)
 
-Pinta_ala_app.cpp.obj: Pinta_ala_app.cpp
-				cl /c /EHsc Pinta_ala_app.cpp.cpp
+$(EXECUTABLE): Pinta_ala_app.cpp
+	cl /c /EHsc Pinta_ala_app.cpp
 
 clean:
 	del $(OBJECTS) $(EXECUTABLE)
